@@ -1,27 +1,27 @@
-var targetX;
-var targetY;
+let targetX;
+let targetY;
 
-var rightMousePressed = false;
+let rightMousePressed = false;
 
-var primaryRateCooldown = 7;
-var primaryRateCount = 0;
-var laserDamageRateCooldown = 3;
+let primaryRateCooldown = 7;
+let primaryRateCount = 0;
+let laserDamageRateCooldown = 3;
 
-var headshotDamage = 30;
-var torsoshotDamage = 20;
-var legshotDamage = 15;
-var laserDamage = 10;
+let headshotDamage = 30;
+let torsoshotDamage = 20;
+let legshotDamage = 15;
+let laserDamage = 10;
 
 function calculateMousePos(evt){
-		var rect = canvas.getBoundingClientRect();
-		//var root = document.documentElement;
-		var mouseX = evt.clientX - rect.left;// - root.scrollLeft;
-		var mouseY = evt.clientY - rect.top;// - root.scrollTop;
-		return {
-			x:mouseX,
-			y:mouseY
-		};
-	}
+	let rect = canvas.getBoundingClientRect();
+	//let root = document.documentElement;
+	let mouseX = evt.clientX - rect.left;// - root.scrollLeft;
+	let mouseY = evt.clientY - rect.top;// - root.scrollTop;
+	return {
+		x:mouseX,
+		y:mouseY
+	};
+}
 
 function detectSecondaryDamage(pos){//called in updateInfected, main.js
 	if(rightMousePressed){
@@ -52,7 +52,7 @@ function detectPrimaryDamage(){
 	if(primaryRateCount<=0 && rightMousePressed == false){
 		primaryRateCount = primaryRateCooldown;
 		playerImage = playerPicPrimary;
-		for(var i=0;i<infected.length;i++){
+		for(let i=0;i<infected.length;i++){
 			infected[i].damagedByPrimary();//if I want auto weapon must be called in updateAll, similar to detectLaserDamage
 			if(infected[i].life <= 0){
 				infected.splice(i,1);
@@ -89,7 +89,7 @@ function handleMouseUp(e) {
 function playerInput(){//setting up input
 	canvas.addEventListener('mousemove',
 	function(evt){
-		var mousePos = calculateMousePos(evt);
+		let mousePos = calculateMousePos(evt);
 		targetX = mousePos.x;
 		targetY = mousePos.y;
 	});

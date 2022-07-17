@@ -1,5 +1,5 @@
-var worldImages = [];
-var picsToLoad = 0;
+let worldImages = [];
+let picsToLoad = 0;
 
 function countLoadedImagesAndShowStartScreen(){//called by beginLoadingImage func keping count how many images to lodad and declaring start of the programm when all are loaded
 	picsToLoad--;
@@ -33,8 +33,9 @@ function loadImageForTileCode(tileCode, fileName){
 	beginLoadingImage(worldImages[tileCode],fileName);
 }
 
+let imageList
 function loadImages(){
-	var imageList = [
+	imageList = [
 	{varName: playerPic, theFile: "playeridle.png"},
 	{varName: playerPicPrimary, theFile: "playerprimary.png"},
 	{varName: playerPicSecondary, theFile: "playersecondary.png"},
@@ -45,7 +46,7 @@ function loadImages(){
 	
 	picsToLoad = imageList.length;
 	
-	for(var i=0;i<imageList.length;i++){
+	for(let i=0;i<imageList.length;i++){
 		if(imageList[i].varName != undefined){
 			beginLoadingImage(imageList[i].varName, imageList[i].theFile);
 		}else{

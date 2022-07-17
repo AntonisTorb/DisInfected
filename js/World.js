@@ -4,7 +4,7 @@ const TILE_COLS = 14;
 const TILE_ROWS = 12;
 const SCORE_SCREEN_WIDTH = 100;
 
-var worldGrid = [0,0,1,0,1,0,0,0,1,0,0,0,0,1,
+let worldGrid = [0,0,1,0,1,0,0,0,1,0,0,0,0,1,
 				 1,0,0,0,0,0,0,0,0,0,1,0,0,0,
 				 0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 				 0,1,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -26,13 +26,13 @@ const TILE_INFECTED = 1;
 }*/
 
 function drawWorld(){
-	var arrayIndex = 0;
-	var tileX = 0;
-	var tileY = 0;
-	for(var eachRow=0;eachRow<TILE_ROWS;eachRow++){
-		for(var eachCol=0;eachCol<TILE_COLS;eachCol++){
-			var tileKind = worldGrid[arrayIndex];
-			var useImg = worldImages[tileKind];
+	let arrayIndex = 0;
+	let tileX = 0;
+	let tileY = 0;
+	for(let eachRow=0;eachRow<TILE_ROWS;eachRow++){
+		for(let eachCol=0;eachCol<TILE_COLS;eachCol++){
+			let tileKind = worldGrid[arrayIndex];
+			let useImg = worldImages[tileKind];
 			
 			canvasContext.drawImage(useImg, tileX,tileY);
 			tileX += TILE_W;

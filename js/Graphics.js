@@ -2,9 +2,9 @@ function colorRect(topLeftX,topLeftY,boxWidth, boxHeight,fillColor){
 	canvasContext.fillStyle = fillColor;
 	canvasContext.fillRect(topLeftX,topLeftY, boxWidth,boxHeight,fillColor);
 }
-
+let useImage
 function drawImageCenteredWithRotation(useImage, posX,posY, angle){
-	var useImage = playerImage;
+	useImage = playerImage;
 	canvasContext.save();
 	canvasContext.translate(posX,posY);
 	canvasContext.rotate(angle);

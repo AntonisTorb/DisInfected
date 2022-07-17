@@ -1,4 +1,4 @@
-var infectedPic = document.createElement("img");
+let infectedPic = document.createElement("img");
 const INFECTED_LEFT = 0;
 const INFECTED_TOP = 1;
 const INFECTED_RIGHT = 2;
@@ -61,14 +61,14 @@ function infectedClass(){
 	}
 	
 	this.movement = function(){
-		var distX = this.x - playerX;
-		var distY = this.y - playerY;
+		let distX = this.x - playerX;
+		let distY = this.y - playerY;
 		this.distanceFromPlayer = Math.sqrt(Math.pow(distX,2) + Math.pow(distY,2));
 		//console.log(this.distanceFromPlayer);
 		
 		if(this.distanceFromPlayer > 50){
-			var speedX = this.speed * Math.sin(this.ang);//sin here and cos on y because of the way the angle is calculated (0 rads vertically and +- Pi/2 horizontally)
-			var speedY = this.speed * Math.cos(this.ang);
+			let speedX = this.speed * Math.sin(this.ang);//sin here and cos on y because of the way the angle is calculated (0 rads vertically and +- Pi/2 horizontally)
+			let speedY = this.speed * Math.cos(this.ang);
 			this.x -= speedX;
 			this.y += speedY;
 			//console.log(this.ang,this.x,this.y);
@@ -78,8 +78,8 @@ function infectedClass(){
 	}
 	
 	this.determineAngle = function(){
-		var distX = this.x - playerX;
-		var distY = this.y - playerY;
+		let distX = this.x - playerX;
+		let distY = this.y - playerY;
 
 		if(distX == 0){//again, why tangent!
 			if(distY >=0){
@@ -88,7 +88,7 @@ function infectedClass(){
 				this.ang = 0;
 			}
 		}else{
-			var infectedTang = distY / distX;
+			let infectedTang = distY / distX;
 			this.ang = Math.atan(infectedTang) + (distX/Math.abs(distX)) * Math.PI / 2;
 		}
 		//console.log(infectedAng,playerAngle);
@@ -178,26 +178,30 @@ function infectedClass(){
 	}
 
 	this.diagonalSetupForSecondary = function(){//get the correct points for the diagonal hitbox (for secondary) depending on infected location
+		let x1temp = this.x - this.hitboxHalfWidth;
+		let y1temp = this.y - infectedPic.height / 2;
+		let x2temp = this.x + this.hitboxHalfWidth;
+		let y2temp = this.y + infectedPic.height / 2;
 		if(this.ang >= 0 && this.ang < Math.PI / 2){
-			var x1temp = this.x - this.hitboxHalfWidth;
-			var y1temp = this.y - infectedPic.height / 2;
-			var x2temp = this.x + this.hitboxHalfWidth;
-			var y2temp = this.y + infectedPic.height / 2;
+			x1temp = this.x - this.hitboxHalfWidth;
+			y1temp = this.y - infectedPic.height / 2;
+			x2temp = this.x + this.hitboxHalfWidth;
+			y2temp = this.y + infectedPic.height / 2;
 		}else if(this.ang >= Math.PI / 2 && this.ang <= Math.PI){
-			var x1temp = this.x + this.hitboxHalfWidth;
-			var y1temp = this.y - infectedPic.height / 2;
-			var x2temp = this.x - this.hitboxHalfWidth;
-			var y2temp = this.y + infectedPic.height / 2;
+			x1temp = this.x + this.hitboxHalfWidth;
+			y1temp = this.y - infectedPic.height / 2;
+			x2temp = this.x - this.hitboxHalfWidth;
+			y2temp = this.y + infectedPic.height / 2;
 		}else if(this.ang >= - Math.PI / 2 && this.ang < 0){
-			var x1temp = this.x - this.hitboxHalfWidth;
-			var y1temp = this.y + infectedPic.height / 2;
-			var x2temp = this.x + this.hitboxHalfWidth;
-			var y2temp = this.y - infectedPic.height / 2;
+			x1temp = this.x - this.hitboxHalfWidth;
+			y1temp = this.y + infectedPic.height / 2;
+			x2temp = this.x + this.hitboxHalfWidth;
+			y2temp = this.y - infectedPic.height / 2;
 		}else if(this.ang > - Math.PI && this.ang < - Math.PI / 2){
-			var x1temp = this.x + this.hitboxHalfWidth;
-			var y1temp = this.y + infectedPic.height / 2;
-			var x2temp = this.x - this.hitboxHalfWidth;
-			var y2temp = this.y - infectedPic.height / 2;
+			x1temp = this.x + this.hitboxHalfWidth;
+			y1temp = this.y + infectedPic.height / 2;
+			x2temp = this.x - this.hitboxHalfWidth;
+			y2temp = this.y - infectedPic.height / 2;
 		}
 		return{
 			x1:x1temp,
@@ -210,26 +214,26 @@ function infectedClass(){
 	this.damagedBySecondary = function (){
 		if(this.secondaryCooldown <= 0){
 			this.secondaryCooldown = laserDamageRateCooldown;
-			var x0 = playerX;
-			var y0 = playerY;
+			let x0 = playerX;
+			let y0 = playerY;
 			
-			var coords = this.diagonalSetupForSecondary();
-			var x1 = coords.x1;
-			var y1 = coords.y1;
-			var x2 = coords.x2;
-			var y2 = coords.y2;
+			let coords = this.diagonalSetupForSecondary();
+			let x1 = coords.x1;
+			let y1 = coords.y1;
+			let x2 = coords.x2;
+			let y2 = coords.y2;
 			
 			
-			var distOneX = x1 - x0;
-			var distOneY = y1 - y0;
-			var distTwoX = x2 - x0;
-			var distTwoY = y2 - y0;
+			let distOneX = x1 - x0;
+			let distOneY = y1 - y0;
+			let distTwoX = x2 - x0;
+			let distTwoY = y2 - y0;
 			
-			var tangOne = distOneY / distOneX;
-			var tangTwo = distTwoY / distTwoX;
+			let tangOne = distOneY / distOneX;
+			let tangTwo = distTwoY / distTwoX;
 			
-			var angOne = Math.atan(tangOne) + (distOneX/Math.abs(distOneX)) * Math.PI / 2;
-			var angTwo = Math.atan(tangTwo) + (distTwoX/Math.abs(distTwoX)) * Math.PI / 2;
+			let angOne = Math.atan(tangOne) + (distOneX/Math.abs(distOneX)) * Math.PI / 2;
+			let angTwo = Math.atan(tangTwo) + (distTwoX/Math.abs(distTwoX)) * Math.PI / 2;
 			
 			//console.log(angOne,angTwo,playerAngle)
 			if(Math.abs(angOne - angTwo)> Math.PI){

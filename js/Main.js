@@ -1,17 +1,17 @@
-var canvas;
-var canvasContext;
-//var time = 0;
-var infected = [];
-var waveInfectedAmmount = 2;//see input.js to set this
-var wave = 1;//see input.js to set this
-var spawnTimer = 0;//see input.js to set this
-var gameStarted = false;
-var myInterval;
-var framesBetweenSpawns = 60;//see input.js to set this
+let canvas;
+let canvasContext;
+//let time = 0;
+let infected = [];
+let waveInfectedAmmount = 2;//see input.js to set this
+let wave = 1;//see input.js to set this
+let spawnTimer = 0;//see input.js to set this
+let gameStarted = false;
+let myInterval;
+let framesBetweenSpawns = 60;//see input.js to set this
 
 function startGame(){//called from input.js when necessary
 
-	var framesPerSecond = 30
+	let framesPerSecond = 30
 	if(gameStarted){
 		myInterval = setInterval(updateAll, 1000/framesPerSecond);
 	}
@@ -47,7 +47,7 @@ function showLoadingScreen(){
 }
 
 function prepareWave(){//put infected instances in an array and set their spawn times
-	for(var i=0;i<waveInfectedAmmount;i++){
+	for(let i=0;i<waveInfectedAmmount;i++){
 		infected[i] = new infectedClass();
 		infected[i].spawnTime = framesBetweenSpawns * i;
 	}
@@ -62,8 +62,8 @@ function updateAll(){
 		updateScoreScreen();
 
 		//helper for mouse coords
-		/*var targetTileX = Math.floor(targetX / TILE_W);
-		var targetTileY = Math.floor(targetY / TILE_H);
+		/*let targetTileX = Math.floor(targetX / TILE_W);
+		let targetTileY = Math.floor(targetY / TILE_H);
 		
 		//colorText(targetTileX+","+targetTileY, targetX+10,targetY-10, 'yellow');
 		colorText(targetX+","+targetY, targetX+10,targetY-10, 'yellow');*/
@@ -78,7 +78,7 @@ function updateAll(){
 }
 
 function updateInfected(){
-	for(var i=infected.length-1;i>=0;i--){//reverse checking the array because detectLaserDamage can remove elements from it
+	for(let i=infected.length-1;i>=0;i--){//reverse checking the array because detectLaserDamage can remove elements from it
 		detectSecondaryDamage(i);/*checking if spawned inside the fuction
 		if I put this at the if bellow it breaks the game somehow (if i kill the last infected 
 		of a wave with secondary, the last infected of the next wave doesn't spawn, maybe doesn't 
@@ -87,7 +87,7 @@ function updateInfected(){
 		from the array and they can't be checked, stutters the game)*/
 	}
 	
-	for(var i=infected.length-1;i>=0;i--){
+	for(let i=infected.length-1;i>=0;i--){
 		if(infected[i].spawnTime == spawnTimer){//spawn them at the right time
 			infected[i].spawn = true;
 		}

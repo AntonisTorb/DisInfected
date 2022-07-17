@@ -1,19 +1,19 @@
-var playerPic = document.createElement("img");
-var playerPicPrimary = document.createElement("img");
-var playerPicSecondary = document.createElement("img");
-var playerImage = playerPic;
+let playerPic = document.createElement("img");
+let playerPicPrimary = document.createElement("img");
+let playerPicSecondary = document.createElement("img");
+let playerImage = playerPic;
 
-var playerX = 350;
-var playerY = 300;
-var playerAngle = 0;
+let playerX = 350;
+let playerY = 300;
+let playerAngle = 0;
 
-var playerLife = 100;//see input.js to set this
-var playerInvincibilityFrames = 20;
-var playerHitCooldown = 0;
+let playerLife = 100;//see input.js to set this
+let playerInvincibilityFrames = 20;
+let playerHitCooldown = 0;
 
-var playerNotDamagedRecently = true;
+let playerNotDamagedRecently = true;
 
-var infectedKilled = 0;//see input.js to set this
+let infectedKilled = 0;//see input.js to set this
 
 function initializePlayerLocation(){
 	playerX = canvas.width / 2 - TILE_W;
@@ -62,22 +62,22 @@ function showWinScreen(){
 
 function rotatePlayer(){//this is a mess, brace yourself!
 	
-	var targetXDist = targetX - playerX;
-	var targetYDist = targetY - playerY;
+	let targetXDist = targetX - playerX;
+	let targetYDist = targetY - playerY;
 
 	if(targetXDist != 0){
 		
-		var tang = targetYDist / targetXDist;//tangent
-		var targetAng = Math.atan(tang) + (targetXDist/Math.abs(targetXDist) )* Math.PI / 2;//angle between player center and mouse position (+/- Pi/2 for actual alignment, may be different depending on orientation of image loaded)
+		let tang = targetYDist / targetXDist;//tangent
+		let targetAng = Math.atan(tang) + (targetXDist/Math.abs(targetXDist) )* Math.PI / 2;//angle between player center and mouse position (+/- Pi/2 for actual alignment, may be different depending on orientation of image loaded)
 
-		var deltaAng = Math.abs(targetAng - playerAngle);//absolute difference of above angle with player rotation angle to calculate the direction of the delayed turning (see below)
+		let deltaAng = Math.abs(targetAng - playerAngle);//absolute difference of above angle with player rotation angle to calculate the direction of the delayed turning (see below)
 		
 		if(deltaAng > 0.01 && deltaAng < Math.PI){//if mouse moved enough but less than a straight angle
 			playerAngle += (targetAng - playerAngle)*0.35;//lurp the angle for smoother motion in more frames (formula used bellow as well)
 			
 		}else if(deltaAng > 0.01 && deltaAng > Math.PI){//if mouse moved enough and more than a straight angle(reverse the rotation direction to take the short way)
-			var angleToTurn = (targetAng - playerAngle)*0.35;
-			var playerAngleTemp = playerAngle - angleToTurn;//separate variable needed bellow
+			let angleToTurn = (targetAng - playerAngle)*0.35;
+			let playerAngleTemp = playerAngle - angleToTurn;//separate variable needed bellow
 			
 			if(targetAng>0 && playerAngleTemp<0 && playerAngleTemp > - Math.PI){//if the cursor is bottom right and player facing bottom left(lurp lag)
 				targetAng -= 2*Math.PI;//for correct lurp calculation
@@ -94,14 +94,14 @@ function rotatePlayer(){//this is a mess, brace yourself!
 				playerAngleTemp += 2.0 * Math.PI;//add 2*Pi to move to correct possition
 				playerAngleTemp +=  angleToTurn;//reverse last move (that's why we need seperate variable in this step)
 				
-				var angleToTurnNew = (targetAng - playerAngleTemp)*0.35;
+				let angleToTurnNew = (targetAng - playerAngleTemp)*0.35;
 				playerAngle = playerAngleTemp + angleToTurnNew;
 				
 			}else if(playerAngleTemp > Math.PI){//mouse moves from bottom right to bottom left area relative to the player
 				playerAngleTemp -= 2.0 * Math.PI;//add 2*Pi to move to correct possition
 				playerAngleTemp +=  angleToTurn;//reverse last move (that's why we need seperate variable in this step)
 				
-				var angleToTurnNew = (targetAng - playerAngleTemp)*0.35;
+				let angleToTurnNew = (targetAng - playerAngleTemp)*0.35;
 				playerAngle = playerAngleTemp + angleToTurnNew;
 
 			}else{
